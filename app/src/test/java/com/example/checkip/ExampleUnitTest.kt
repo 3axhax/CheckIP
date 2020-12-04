@@ -11,9 +11,9 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
 
-    private val test1 = IPPoint("1.2.3.4", "w-host.org")
-    private val test2 = IPPoint("77.6.5.4", "def.com")
-    private val test3 = IPPoint("44.44.55.55", "abc.com")
+    private val test1 = IPPoint("1.2.3.4", "w-host.org", "public")
+    private val test2 = IPPoint("77.6.5.4", "def.com", "strange type")
+    private val test3 = IPPoint("44.44.55.55", "abc.com", "good_bot")
 
     private var collection = mutableListOf(test1, test2, test3)
 
@@ -24,13 +24,16 @@ class ExampleUnitTest {
         println(collection)
         collection.sortPoint("ip")
         println(collection)
+        collection.sortPoint("type")
+        println(collection)
     }
 
     private fun MutableList<IPPoint>.sortPoint(field: String = "ip"): MutableList<IPPoint> {
         val test = this
-        if (field in listOf("ip", "hostname")) {
+        if (field in listOf("ip", "hostname", "type")) {
             when(field) {
                 "hostname" -> this.sortBy{it.hostname}
+                "type" -> this.sortBy{it.type}
                 "ip" -> this.sortWith (fun (a: IPPoint, b: IPPoint) : Int{
                     val ipA = a.ip.split('.')
                     val ipB = b.ip.split('.')

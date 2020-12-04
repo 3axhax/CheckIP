@@ -1,11 +1,17 @@
 package com.example.checkip
 
-data class IPPoint (var ip: String, val hostname: String) {
+data class IPPoint (var ip: String, val hostname: String, var type: String) {
 
     private val defaultIp = "0.0.0.0"
+    private val typeList = listOf("public", "hosting", "good_bot", "unknown")
 
     init {
-        checkIP();
+        checkIP()
+        checkType()
+    }
+
+    private fun checkType() {
+        if (type !in typeList) type = "unknown"
     }
 
     private fun checkIP() {
