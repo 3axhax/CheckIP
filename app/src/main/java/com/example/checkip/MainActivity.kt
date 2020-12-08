@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         var text_list = ""
 
         if (collection != null) {
-            collection.forEach { text_list += it.ip + ", " + it.hostname + ", " + it.type + "\n" }
+            collection.forEach { text_list += "{$it.ip}, {$it.hostname}, {$it.type}\n" }
         }
 
         if (text_list != "") {
