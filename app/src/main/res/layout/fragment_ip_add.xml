@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.IPAddFragment">
+
+    <EditText
+        android:id="@+id/ip_input_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:ems="3"
+        android:gravity="center"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:maxLength="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="0" />
+
+    <EditText
+        android:id="@+id/ip_input_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="0"
+        android:ems="3"
+        android:gravity="center"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:maxLength="3"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/point1" />
+
+    <EditText
+        android:id="@+id/ip_input_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="0"
+        android:ems="3"
+        android:gravity="center"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:maxLength="3"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/point3" />
+
+    <EditText
+        android:id="@+id/ip_input_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="0"
+        android:ems="3"
+        android:gravity="center"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:maxLength="3"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/point2" />
+
+    <TextView
+        android:id="@+id/point1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/point"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/ip_input_1" />
+
+    <TextView
+        android:id="@+id/point3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/point"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/ip_input_2" />
+
+    <TextView
+        android:id="@+id/point2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/point"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_1"
+        app:layout_constraintStart_toEndOf="@+id/ip_input_3" />
+
+    <Button
+        android:id="@+id/add_button_add_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_ip"
+        app:layout_constraintBottom_toBottomOf="@+id/ip_input_4"
+        app:layout_constraintStart_toEndOf="@+id/ip_input_4" />
+
+    <TextView
+        android:id="@+id/text_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="18sp"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="@+id/ip_input_1"
+        app:layout_constraintTop_toBottomOf="@+id/ip_input_1" />
+
+    <Button
+        android:id="@+id/add_button_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/ip_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_button_add_ip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
