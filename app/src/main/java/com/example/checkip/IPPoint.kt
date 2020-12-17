@@ -1,36 +1,8 @@
 package com.example.checkip
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class IPPoint (var ip: String, val hostname: String, var type: String) : Serializable {
-
-    private val defaultIp = "0.0.0.0"
-    private val typeList = listOf("public", "hosting", "good_bot", "unknown")
-
-    init {
-        checkIP()
-        checkType()
-    }
-
-    private fun checkType() {
-        if (type !in typeList) type = "unknown"
-    }
-
-    private fun checkIP() :Boolean {
-        val tmp = ip.split('.')
-        if (tmp.size != 4) {
-            ip = defaultIp
-            return false
-        }
-        else {
-            for (i in tmp.indices) {
-                if (tmp[i].toInt() !in 0..255) {
-                    ip = defaultIp
-                    return false
-                }
-            }
-        }
-        return true
-    }
-
-}
+@Parcelize
+data class IPPoint(var ip: String, val hostname: String = "hostname", var type: String = "type") :
+    Parcelable

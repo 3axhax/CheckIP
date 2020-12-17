@@ -3,7 +3,9 @@ package com.example.checkip.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.example.checkip.IPPoint
 import com.example.checkip.R
+import com.example.checkip.feature.list.ui.ListIPFragment
 import kotlinx.android.synthetic.main.fragment_ip_detail.*
 
 /**
@@ -21,26 +23,29 @@ class IPDetailFragment : Fragment(R.layout.fragment_ip_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detail_button_ip_list.setOnClickListener {
-            requireFragmentManager().beginTransaction()
-                    .replace(R.id.container, IPListFragment.newInstance())
-                    .addToBackStack("IPListFragment")
-                    .commit()
+        arguments?.let {
+            val ip = it.getParcelable<IPPoint>(IP)
+            tvIP.text = ip?.ip
         }
 
-        detail_button_add_new_ip.setOnClickListener {
+        detailBack.setOnClickListener {
             requireFragmentManager().beginTransaction()
-                    .replace(R.id.container, IPAddFragment.newInstance())
-                    .addToBackStack("IPAddFragment")
-                    .commit()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                .remove(this)
+                .commit()
         }
     }
 
     companion object {
+
+        private const val IP = "IP"
+
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(ip: IPPoint) =
             IPDetailFragment().apply {
-                arguments = Bundle().apply {}
+                arguments = Bundle().apply {
+                    putParcelable(IP, ip)
+                }
             }
     }
 }

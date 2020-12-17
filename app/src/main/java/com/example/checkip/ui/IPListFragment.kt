@@ -21,20 +21,6 @@ class IPListFragment : Fragment(R.layout.fragment_ip_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        list_button_add_ip.setOnClickListener {
-            requireFragmentManager().beginTransaction()
-                    .replace(R.id.container, IPAddFragment.newInstance())
-                    .addToBackStack("IPListFragment")
-                    .commit()
-        }
-
-        list_button_details.setOnClickListener {
-            requireFragmentManager().beginTransaction()
-                    .replace(R.id.container, IPDetailFragment.newInstance())
-                    .addToBackStack("IPDetailFragment")
-                    .commit()
-        }
     }
 
     companion object {
