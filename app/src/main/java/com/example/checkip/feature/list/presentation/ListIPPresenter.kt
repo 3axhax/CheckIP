@@ -1,6 +1,7 @@
 package com.example.checkip.feature.list.presentation
 
 import com.example.checkip.IPPoint
+import com.example.checkip.data.IPListDao
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
@@ -8,20 +9,15 @@ import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-class ListIPPresenter : MvpPresenter<ListIPView>() {
+class ListIPPresenter(
+    private val IPListDao: IPListDao
+) : MvpPresenter<ListIPView>() {
 
-    private var ips = listOf(
-        IPPoint("1.1.1.1"),
-        IPPoint("2.2.3.4"),
-        IPPoint("2.5.7.9"),
-        IPPoint("3.2.3.4"),
-        IPPoint("250.26.33.40"),
-        IPPoint("25.27.44.50"),
-        IPPoint("77.56.89.99"),
-    )
+    private var ips = emptyList<IPPoint>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        ips = IPListDao.getAll()
         viewState.showIPs(ips)
     }
 
@@ -30,8 +26,17 @@ class ListIPPresenter : MvpPresenter<ListIPView>() {
     }
 
     fun onIPDelete(ip: IPPoint) {
-        ips = ips.filter { it != ip }
+        IPListDao.delete(ip)
+        ips = IPListDao.getAll()
         viewState.showIPs(ips)
+    }
+
+    fun onFilterClick() {
+        viewState.openFilterScreen()
+    }
+
+    fun onAddClick() {
+        viewState.openAddScreen()
     }
 }
 
@@ -42,5 +47,11 @@ interface ListIPView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openDetailScreen(ip: IPPoint)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun openFilterScreen()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun openAddScreen()
 
 }

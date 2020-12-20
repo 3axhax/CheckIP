@@ -41,8 +41,10 @@ class ListIPAdapter(private val onIPClick: (IPPoint) -> Unit,
             onIPDelete(item)
         }
         holder.ipIP.text = item.ip
-        holder.ipHostnameIP.text = item.hostname
-        holder.ipTypeIP.text = item.type
+        holder.ipInList.text = if (item.in_list) "In BL" else " Not in BL"
+        holder.ipNetworkType.text = item.network_type
+        holder.ipCountry.text = item.country
+        holder.ipLastActivity.text = item.last_activity
     }
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),

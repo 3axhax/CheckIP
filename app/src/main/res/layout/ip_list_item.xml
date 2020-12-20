@@ -8,19 +8,30 @@
 
     <TextView
         android:id="@+id/ipIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1.1.1.1" />
+
+    <TextView
+        android:id="@+id/ipInList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ipIP"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="1.1.1.1" />
+        tools:text="Not in BL" />
 
     <TextView
-        android:id="@+id/ipHostnameIP"
+        android:id="@+id/ipNetworkType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,30 +39,43 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/ipIP"
         app:layout_constraintTop_toBottomOf="@id/ipIP"
-        tools:text="Hostname" />
+        tools:text="Unknown" />
 
     <TextView
-        android:id="@+id/ipTypeIP"
+        android:id="@+id/ipCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/gray"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/ipHostnameIP"
-        app:layout_constraintTop_toTopOf="@id/ipHostnameIP"
-        tools:layout_editor_absoluteX="291dp"
-        tools:text="Type" />
+        app:layout_constraintStart_toEndOf="@id/ipNetworkType"
+        app:layout_constraintTop_toBottomOf="@id/ipIP"
+        tools:text="US" />
+
+    <TextView
+        android:id="@+id/ipLastActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/ipCountry"
+        app:layout_constraintTop_toBottomOf="@id/ipIP"
+        tools:text="2020-01-01 00:00:00" />
 
     <ImageButton
         android:id="@+id/ibDelete"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:contentDescription="@string/delete" />
+        android:background="#fff"
+        app:srcCompat="@android:drawable/ic_delete" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
