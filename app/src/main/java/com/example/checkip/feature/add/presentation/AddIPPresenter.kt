@@ -14,11 +14,16 @@ class AddIPPresenter(
 
     fun addIP(ip: String) {
         if (this.checkIP(ip)) {
-            IPListDao.add(IPPoint(ip))
-            viewState.openIPList()
+            if (!IPListDao.isInList(IPPoint(ip = ip))) {
+                IPListDao.add(IPPoint(ip))
+                viewState.openIPList()
+            }
+            else {
+                viewState.existIP()
+            }
         }
         else {
-            viewState.showIPError()
+            viewState.invalidIP()
         }
 
     }
@@ -48,6 +53,9 @@ interface AddIPView: MvpView {
     fun openIPList()
 
     @StateStrategyType(SkipStrategy::class)
-    fun showIPError()
+    fun invalidIP()
+
+    @StateStrategyType(SkipStrategy::class)
+    fun existIP()
 
 }

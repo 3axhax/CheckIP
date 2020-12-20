@@ -48,8 +48,12 @@ class AddIPFragment: MvpAppCompatFragment(R.layout.fragment_ip_add), AddIPView {
             .commit()
     }
 
-    override fun showIPError() {
+    override fun invalidIP() {
         Toast.makeText(requireContext(), "Invalid IP", Toast.LENGTH_LONG).show()
+    }
+
+    override fun existIP() {
+        Toast.makeText(requireContext(), "This IP is exist", Toast.LENGTH_LONG).show()
     }
 
     companion object {

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.checkip.IPPoint
 import com.example.checkip.R
+import com.example.checkip.data.FilterDaoImpl
 import com.example.checkip.data.IPListDaoImpl
 import com.example.checkip.feature.add.ui.AddIPFragment
 import com.example.checkip.feature.list.presentation.ListIPPresenter
@@ -22,6 +23,12 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
     private val presenter: ListIPPresenter by moxyPresenter {
         ListIPPresenter(
             IPListDao = IPListDaoImpl(
+                sharedPreferences = requireContext().getSharedPreferences(
+                    "data",
+                    Context.MODE_PRIVATE
+                )
+            ),
+            FilterDao = FilterDaoImpl(
                 sharedPreferences = requireContext().getSharedPreferences(
                     "data",
                     Context.MODE_PRIVATE
@@ -46,6 +53,7 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
 
         bFilter.setOnClickListener { presenter.onFilterClick() }
         bAdd.setOnClickListener { presenter.onAddClick() }
+        bClearFilter.setOnClickListener { presenter.resetFilter() }
     }
 
     override fun onDestroyView() {
@@ -85,6 +93,10 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
             .replace(R.id.container, AddIPFragment.newInstance())
             .addToBackStack("AddIPFragment")
             .commit()
+    }
+
+    override fun showClearFilter(show: Boolean) {
+        bClearFilter.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     companion object {

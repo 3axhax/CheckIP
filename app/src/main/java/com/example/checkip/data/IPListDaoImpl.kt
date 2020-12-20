@@ -34,6 +34,7 @@ class IPListDaoImpl(private val sharedPreferences: SharedPreferences) : IPListDa
     }
 
     override fun getAll(): List<IPPoint> = ips
+
     override fun isInList(ip: IPPoint): Boolean {
         ips.forEach { if(it.ip == ip.ip) return true }
         return false
