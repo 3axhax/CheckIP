@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.checkip.IPPoint
+import com.example.checkip.domain.IPPoint
 import com.example.checkip.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.ip_list_item.*
 
 class ListIPAdapter(private val onIPClick: (IPPoint) -> Unit,
-                    private val onIPDelete: (IPPoint) -> Unit) :
+                    private val onIPDelete: (IPPoint) -> Unit,
+                    private val onIPRefresh: (IPPoint) -> Unit) :
     ListAdapter<IPPoint, ListIPAdapter.ViewHolder>(
         object : DiffUtil.ItemCallback<IPPoint> () {
             override fun areItemsTheSame(oldItem: IPPoint, newItem: IPPoint): Boolean {
@@ -40,11 +41,13 @@ class ListIPAdapter(private val onIPClick: (IPPoint) -> Unit,
         holder.ibDelete.setOnClickListener {
             onIPDelete(item)
         }
+        holder.ibRefresh.setOnClickListener {
+            onIPRefresh(item)
+        }
         holder.ipIP.text = item.ip
-        holder.ipInList.text = if (item.in_list) "In BL" else " Not in BL"
+        holder.ipInList.text = if (item.in_list) "Blacklisted" else "Not in List"
         holder.ipNetworkType.text = item.network_type
         holder.ipCountry.text = item.country
-        holder.ipLastActivity.text = item.last_activity
     }
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),

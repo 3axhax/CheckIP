@@ -12,4 +12,5 @@
     <string name="filter">Filter</string>
     <string name="search_string">Search string</string>
     <string name="clear_filter">Clear Filter</string>
+    <string name="refresh">Refresh</string>
 </resources>

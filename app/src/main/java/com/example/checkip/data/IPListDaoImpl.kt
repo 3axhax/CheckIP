@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import com.example.checkip.IPPoint
+import com.example.checkip.domain.IPPoint
 
 class IPListDaoImpl(private val sharedPreferences: SharedPreferences) : IPListDao {
 
@@ -30,7 +30,7 @@ class IPListDaoImpl(private val sharedPreferences: SharedPreferences) : IPListDa
     }
 
     override fun delete(ip: IPPoint) {
-        ips = ips.filter { it != ip }
+        ips = ips.filter { it.ip != ip.ip }
     }
 
     override fun getAll(): List<IPPoint> = ips
@@ -38,6 +38,21 @@ class IPListDaoImpl(private val sharedPreferences: SharedPreferences) : IPListDa
     override fun isInList(ip: IPPoint): Boolean {
         ips.forEach { if(it.ip == ip.ip) return true }
         return false
+    }
+
+    override fun replace(ip: IPPoint) {
+        if(this.isInList(ip)) {
+            var tmpIps: List<IPPoint> = emptyList()
+            ips.forEach {
+                if (it.ip == ip.ip) {
+                    tmpIps = tmpIps + ip
+                }
+                else tmpIps = tmpIps + it
+            }
+            ips = tmpIps
+            /*this.delete(ip)
+            this.add(ip)*/
+        }
     }
 
     companion object {

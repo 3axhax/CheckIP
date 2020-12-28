@@ -4,8 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.checkip.R
 import com.example.checkip.data.IPListDaoImpl
+import com.example.checkip.di.cleantalkAPI
+import com.example.checkip.domain.IPSpamCheckUseCase
 import com.example.checkip.feature.add.presentation.AddIPPresenter
 import com.example.checkip.feature.add.presentation.AddIPView
 import com.example.checkip.feature.list.ui.ListIPFragment
@@ -22,7 +25,8 @@ class AddIPFragment: MvpAppCompatFragment(R.layout.fragment_ip_add), AddIPView {
                     "data",
                     Context.MODE_PRIVATE
                 )
-            )
+            ),
+            IPSpamCheckUseCase(cleantalkAPI)
         )
     }
 
@@ -54,6 +58,14 @@ class AddIPFragment: MvpAppCompatFragment(R.layout.fragment_ip_add), AddIPView {
 
     override fun existIP() {
         Toast.makeText(requireContext(), "This IP is exist", Toast.LENGTH_LONG).show()
+    }
+
+    override fun errorAPI() {
+        Toast.makeText(requireContext(), "Error in API Request", Toast.LENGTH_LONG).show()
+    }
+
+    override fun showLoading(isShow: Boolean) {
+        progress.isVisible = isShow
     }
 
     companion object {

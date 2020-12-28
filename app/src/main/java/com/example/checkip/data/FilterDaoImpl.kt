@@ -1,7 +1,7 @@
 package com.example.checkip.data
 
 import android.content.SharedPreferences
-import com.example.checkip.Filter
+import com.example.checkip.domain.Filter
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

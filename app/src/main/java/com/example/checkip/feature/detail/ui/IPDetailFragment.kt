@@ -3,7 +3,7 @@ package com.example.checkip.feature.detail.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import com.example.checkip.IPPoint
+import com.example.checkip.domain.IPPoint
 import com.example.checkip.R
 import com.example.checkip.feature.detail.presentation.IPDetailPresenter
 import com.example.checkip.feature.detail.presentation.IPDetailView
@@ -32,7 +32,10 @@ class IPDetailFragment : MvpAppCompatFragment(R.layout.fragment_ip_detail), IPDe
 
         arguments?.let {
             val ip = it.getParcelable<IPPoint>(IP)
-            tvIP.text = ip?.ip
+            val inList = if (ip?.in_list == true) "Blacklisted" else "Not in List"
+            tvIP.text = "${ip?.ip}, $inList"
+            tvFrequency.text = "${ip?.frequency} websites attacked"
+            tvFullResponse.text = ip?.fullData
         }
 
         detailBack.setOnClickListener { presenter.closeDetail() }

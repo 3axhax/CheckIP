@@ -1,6 +1,6 @@
 package com.example.checkip.data
 
-import com.example.checkip.IPPoint
+import com.example.checkip.domain.IPPoint
 
 interface IPListDao {
 
@@ -22,6 +22,11 @@ interface IPListDao {
     /**
      * @return Is IP in List
      */
-    fun isInList(ip: IPPoint) : Boolean
+    fun isInList(ip: IPPoint): Boolean
+
+    /**
+     * Replace Exist IP
+     */
+    fun replace(ip: IPPoint)
 
 }

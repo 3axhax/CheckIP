@@ -3,17 +3,22 @@ package com.example.checkip.feature.list.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.checkip.IPPoint
+import com.example.checkip.domain.IPPoint
 import com.example.checkip.R
 import com.example.checkip.data.FilterDaoImpl
 import com.example.checkip.data.IPListDaoImpl
+import com.example.checkip.di.cleantalkAPI
+import com.example.checkip.domain.IPSpamCheckUseCase
 import com.example.checkip.feature.add.ui.AddIPFragment
 import com.example.checkip.feature.list.presentation.ListIPPresenter
 import com.example.checkip.feature.list.presentation.ListIPView
 import com.example.checkip.feature.detail.ui.IPDetailFragment
 import com.example.checkip.feature.filter.ui.FilterIPFragment
 import kotlinx.android.synthetic.main.fragment_ip_list.*
+import kotlinx.android.synthetic.main.fragment_ip_list.progress
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -33,7 +38,8 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
                     "data",
                     Context.MODE_PRIVATE
                 )
-            )
+            ),
+            IPSpamCheckUseCase(cleantalkAPI)
         )
     }
 
@@ -46,6 +52,8 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
                 presenter.onIPClick(it)
             }, onIPDelete = {
                 presenter.onIPDelete(it)
+            }, onIPRefresh = {
+                presenter.onIPRefresh(it)
             }).also {
                 ListIPAdapter = it
             }
@@ -97,6 +105,14 @@ class ListIPFragment : MvpAppCompatFragment(R.layout.fragment_ip_list), ListIPVi
 
     override fun showClearFilter(show: Boolean) {
         bClearFilter.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun errorAPI() {
+        Toast.makeText(requireContext(), "Error in API Request", Toast.LENGTH_LONG).show()
+    }
+
+    override fun showLoading(isShow: Boolean) {
+        progress.isVisible = isShow
     }
 
     companion object {

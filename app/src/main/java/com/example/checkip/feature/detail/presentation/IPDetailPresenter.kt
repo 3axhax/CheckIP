@@ -1,6 +1,5 @@
 package com.example.checkip.feature.detail.presentation
 
-import com.example.checkip.IPPoint
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

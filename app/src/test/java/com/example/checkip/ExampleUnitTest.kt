@@ -1,5 +1,6 @@
 package com.example.checkip
 
+import com.example.checkip.domain.IPPoint
 import org.junit.Test
 
 import org.junit.Assert.*
