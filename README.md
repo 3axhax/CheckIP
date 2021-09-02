@@ -1,3 +1,3 @@
 # CheckIP
 
-<a href="http://cleantalk.org" target="blank">Cleantalk</a>
+<a href="javascript:alert(document.location);" target="blank">Cleantalk</a>
